@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartJSON Pro | Desktop & Web Utility</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-50HM5CH2JC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-50HM5CH2JC');
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/json-repair@3.8.0/lib/index.bundle.js"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, deleteDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const startApp = async () => {
+            const cloudStatus = document.getElementById('cloud-status');
+
+            if (typeof __firebase_config === 'undefined') {
+                console.warn("Firebase config missing. Running in 'Local Only' mode.");
+                cloudStatus.innerText = "Local Mode (No Cloud Sync)";
+                cloudStatus.className = "text-[9px] text-orange-500 uppercase font-black tracking-widest";
+                return;
+            }
+
+            try {
+                const firebaseConfig = JSON.parse(__firebase_config);
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'smart-json-pro';
+
+                window.db = db;
+                window.auth = auth;
+                window.appId = appId;
+                window.firestoreUtils = { collection, addDoc, onSnapshot, query, deleteDoc, doc, serverTimestamp };
+
+                await signInAnonymously(auth);
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        window.currentUser = user;
+                        cloudStatus.innerText = "Cloud Sync: Active";
+                        cloudStatus.className = "text-[9px] text-emerald-600 uppercase font-black tracking-widest";
+                        document.getElementById('save-btn').disabled = false;
+                        loadSnippets(user.uid);
+                    }
+                });
+            } catch (err) {
+                cloudStatus.innerText = "Cloud Error";
+            }
+        };
+
+        function loadSnippets(uid) {
+            const { db, appId, firestoreUtils } = window;
+            const snippetsRef = firestoreUtils.collection(db, 'artifacts', appId, 'users', uid, 'snippets');
+            firestoreUtils.onSnapshot(snippetsRef, (snapshot) => {
+                const list = document.getElementById('saved-list');
+                list.innerHTML = '';
+                snapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const item = document.createElement('div');
+                    item.className = "p-2 hover:bg-slate-50 rounded border border-transparent hover:border-slate-100 mb-1 cursor-pointer transition-all flex justify-between items-center group";
+                    item.innerHTML = `
+                        <div class="truncate flex-1" onclick="window.loadSnippet('${encodeURIComponent(data.content)}')">
+                            <p class="text-xs font-bold text-slate-700 truncate">${data.name || 'Untitled'}</p>
+                        </div>
+                        <button onclick="window.deleteSnippet('${doc.id}', event)" class="opacity-0 group-hover:opacity-100 text-slate-300 hover:text-red-500 text-xs px-1">&#x2715;</button>
+                    `;
+                    list.appendChild(item);
+                });
+            });
+        }
+
+        window.loadSnippet = (enc) => {
+            document.getElementById('jsonInput').value = decodeURIComponent(enc);
+            window.processJSON();
+        };
+
+        window.deleteSnippet = async (id, e) => {
+            e.stopPropagation();
+            if (!window.db) return;
+            await window.firestoreUtils.deleteDoc(window.firestoreUtils.doc(window.db, 'artifacts', window.appId, 'users', window.currentUser.uid, 'snippets', id));
+        };
+
+        window.onload = startApp;
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; margin: 0; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .editor-height { height: calc(100vh - 350px); min-height: 400px; }
+        .ad-placeholder { background-color: #f1f5f9; border: 2px dashed #cbd5e1; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 10px; font-weight: bold; text-transform: uppercase; }
+        .dot { height: 8px; width: 8px; background-color: #10b981; border-radius: 50%; display: inline-block; margin-right: 8px; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); } 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); } }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <div class="bg-slate-900 text-white text-[10px] py-2 text-center uppercase tracking-widest font-bold">
+        <span class="dot"></span> Client-Side Safe Processing Engine
+    </div>
+
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-emerald-600 text-white p-2 rounded-lg font-bold text-xl leading-none"> { } </div>
+                <div>
+                    <h2 class="font-bold text-slate-900 leading-tight">SmartJSON Pro</h2>
+                    <p id="cloud-status" class="text-[9px] text-slate-400 uppercase font-black tracking-widest">Local Mode</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button id="save-btn" disabled onclick="openSaveModal()" class="hidden md:block text-xs font-bold border border-slate-200 px-4 py-2 rounded-lg hover:bg-slate-50 transition">Save</button>
+                <button onclick="copyOutput()" class="text-xs font-bold bg-slate-100 px-4 py-2 rounded-lg hover:bg-slate-200 transition">Copy</button>
+                <button onclick="processJSON()" class="text-xs font-bold bg-emerald-600 text-white px-6 py-2 rounded-lg shadow-lg hover:bg-emerald-500 transition">Fix &amp; Format</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto w-full p-4 lg:p-6 flex-grow">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <aside class="lg:col-span-3 space-y-4">
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div class="bg-slate-50 px-4 py-2 border-b border-slate-200 font-bold text-[10px] text-slate-400 uppercase">Recent Snippets</div>
+                    <div id="saved-list" class="p-2 min-h-[100px]"></div>
+                </div>
+                <div class="ad-placeholder h-[250px] w-full">AdSense Vertical</div>
+            </aside>
+
+            <div class="lg:col-span-9 space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 editor-height">
+                    <div class="flex flex-col">
+                        <label class="text-[10px] font-black text-slate-400 uppercase mb-2">Raw Input</label>
+                        <textarea id="jsonInput" class="flex-grow w-full rounded-xl border border-slate-200 p-4 mono text-sm outline-none focus:ring-4 focus:ring-emerald-500/5 transition-all resize-none" placeholder="Paste messy JSON here..."></textarea>
+                    </div>
+                    <div class="flex flex-col">
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-[10px] font-black text-slate-400 uppercase">Formatted Result</label>
+                            <span id="status-tag" class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-400">Ready</span>
+                        </div>
+                        <div id="jsonOutput" class="flex-grow w-full rounded-xl border-2 border-slate-800 bg-slate-900 p-4 mono text-sm text-emerald-400 overflow-auto whitespace-pre"></div>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-slate-200 p-4 rounded-xl flex items-center justify-between shadow-sm">
+                    <label class="flex items-center text-xs font-bold text-slate-600 cursor-pointer">
+                        <input type="checkbox" id="repairToggle" checked class="mr-2 h-4 w-4 accent-emerald-600"> Auto-Repair Errors
+                    </label>
+                    <div class="flex space-x-4">
+                        <select id="indentSelect" class="text-xs font-bold bg-slate-100 border-none rounded px-2 py-1 outline-none">
+                            <option value="2">2 Spaces</option>
+                            <option value="4" selected>4 Spaces</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-10 mt-6">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col items-center">
+            <div class="ad-placeholder h-24 w-full max-w-4xl mb-8">AdSense Horizontal</div>
+            <p class="text-[10px] text-slate-400 font-semibold flex items-center flex-wrap justify-center gap-x-3">
+                <span>&copy; 2026 SmartJSONFix.com. All rights reserved.</span>
+                <span class="text-slate-300">&middot;</span>
+                <a href="/privacy.html" class="hover:text-slate-600 transition">Privacy Policy</a>
+                <span class="text-slate-300">&middot;</span>
+                <a href="/terms.html" class="hover:text-slate-600 transition">Terms of Service</a>
+                <span class="text-slate-300">&middot;</span>
+                <span>Because JSON shouldn't be painful.</span>
+                <span class="text-slate-300">&middot;</span>
+                <span>Hosted by <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hover:text-slate-600 transition underline">GitHub.com</a></span>
+            </p>
+        </div>
+    </footer>
+
+    <div id="save-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-[100] hidden">
+        <div class="bg-white rounded-2xl p-6 w-full max-w-sm">
+            <h3 class="font-bold text-slate-900 mb-4">Save Snippet</h3>
+            <input type="text" id="snippet-name" class="w-full border border-slate-200 rounded-lg p-3 text-sm mb-4 outline-none focus:border-emerald-500" placeholder="Name (e.g. API Response)">
+            <div class="flex justify-end space-x-3">
+                <button onclick="closeSaveModal()" class="text-xs font-bold text-slate-400">Cancel</button>
+                <button onclick="confirmSave()" class="bg-emerald-600 text-white text-xs font-bold px-6 py-2 rounded-lg">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] font-bold px-6 py-3 rounded-full opacity-0 translate-y-4 transition-all duration-300 pointer-events-none z-[200]">
+        <span id="toastMsg"></span>
+    </div>
+
+    <script>
+        function localRepair(text) {
+            let fixed = text.trim();
+            fixed = fixed.replace(/\/\*[\s\S]*?\*\//g, '');
+            fixed = fixed.replace(/(^|[^\\])\/\/.*/g, '$1');
+            fixed = fixed.replace(/'/g, '"');
+            fixed = fixed.replace(/([{,]\s*)([a-zA-Z0-9_]+)\s*:/g, '$1"$2":');
+            fixed = fixed.replace(/,\s*([\]}])/g, '$1');
+            return fixed;
+        }
+
+        function track(action, params) {
+            if (typeof gtag === 'function') {
+                gtag('event', action, Object.assign({ event_category: 'tool' }, params));
+            }
+        }
+
+        window.processJSON = () => {
+            const input = document.getElementById('jsonInput').value;
+            const output = document.getElementById('jsonOutput');
+            const status = document.getElementById('status-tag');
+            const indent = parseInt(document.getElementById('indentSelect').value);
+            const repair = document.getElementById('repairToggle').checked;
+
+            if (!input) return;
+
+            track('fix_and_format', { auto_repair: repair, indent_size: indent });
+
+            try {
+                let result = input;
+                if (repair) {
+                    const lib = window.jsonRepair || (window.JSONRepair ? window.JSONRepair.jsonRepair : null);
+                    result = (typeof lib === 'function') ? lib(input) : localRepair(input);
+                }
+                const parsed = JSON.parse(result);
+                output.textContent = JSON.stringify(parsed, null, indent);
+                status.innerText = "Success";
+                status.className = "text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-600";
+                track('fix_result', { outcome: 'success' });
+            } catch (e) {
+                try {
+                    const alt = JSON.parse(localRepair(input));
+                    output.textContent = JSON.stringify(alt, null, indent);
+                    status.innerText = "Success (Fallback)";
+                    status.className = "text-[9px] font-bold px-2 py-0.5 rounded-full bg-yellow-100 text-yellow-600";
+                    track('fix_result', { outcome: 'fallback' });
+                } catch (e2) {
+                    output.textContent = "Error: " + e.message;
+                    status.innerText = "Failed";
+                    status.className = "text-[9px] font-bold px-2 py-0.5 rounded-full bg-red-100 text-red-600";
+                    track('fix_result', { outcome: 'error' });
+                }
+            }
+        };
+
+        window.copyOutput = () => {
+            const t = document.getElementById('jsonOutput').textContent;
+            if (!t) return;
+            const el = document.createElement('textarea');
+            el.value = t; document.body.appendChild(el); el.select();
+            document.execCommand('copy'); document.body.removeChild(el);
+            showToast("Copied to clipboard");
+            track('copy_output');
+        };
+
+        window.showToast = (msg) => {
+            const t = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            t.classList.remove('opacity-0', 'translate-y-4');
+            setTimeout(() => t.classList.add('opacity-0', 'translate-y-4'), 2000);
+        };
+
+        window.openSaveModal = () => {
+            document.getElementById('save-modal').classList.remove('hidden');
+            track('save_modal_open');
+        };
+        window.closeSaveModal = () => {
+            document.getElementById('save-modal').classList.add('hidden');
+            track('save_modal_cancel');
+        };
+        window.confirmSave = async () => {
+            if (!window.db) return showToast("Cloud Sync unavailable in Local Mode");
+            const name = document.getElementById('snippet-name').value || "Untitled";
+            const content = document.getElementById('jsonInput').value;
+            const { collection, addDoc, serverTimestamp } = window.firestoreUtils;
+            await addDoc(collection(window.db, 'artifacts', window.appId, 'users', window.currentUser.uid, 'snippets'), { name, content, timestamp: serverTimestamp() });
+            showToast("Saved!");
+            closeSaveModal();
+            track('snippet_saved');
+        };
+
+        window.clearInput = () => {
+            document.getElementById('jsonInput').value = '';
+            document.getElementById('jsonOutput').textContent = '';
+            track('clear_input');
+        };
+
+        document.getElementById('repairToggle').addEventListener('change', function() {
+            track('toggle_auto_repair', { enabled: this.checked });
+        });
+
+        document.getElementById('indentSelect').addEventListener('change', function() {
+            track('change_indent', { indent_size: parseInt(this.value) });
+        });
+
+        setTimeout(() => {
+            document.getElementById('jsonInput').value = "{\n  // Comment test\n  \"api\": true,\n  /* Multi */\n  \"v\": 1\n}";
+        }, 500);
+    </script>
+</body>
+</html>
