@@ -15,7 +15,7 @@
       gtag('js', new Date());
       gtag('config', 'G-50HM5CH2JC');
     </script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
     <script src="https://cdn.jsdelivr.net/npm/json-repair@3.8.0/lib/index.bundle.js"></script>
 
     <script type="module">
@@ -23,19 +23,23 @@
         import { getAuth, onAuthStateChanged, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, onSnapshot, query, deleteDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
+        const firebaseConfig = {
+            apiKey: "AIzaSyDWnweBzdFhEtrXLwhV4j2TFhk73gGy1E0",
+            authDomain: "smartjsonfix.firebaseapp.com",
+            projectId: "smartjsonfix",
+            storageBucket: "smartjsonfix.firebasestorage.app",
+            messagingSenderId: "700337191049",
+            appId: "1:700337191049:web:ed92132eef1645b0f06e58",
+            measurementId: "G-QPBW1KV4WC"
+        };
+
         const startApp = async () => {
             const cloudStatus = document.getElementById('cloud-status');
-
-            if (typeof __firebase_config === 'undefined') {
-                console.warn("Firebase config missing. Running in 'Local Only' mode.");
-                cloudStatus.innerText = "Local Mode (No Cloud Sync)";
-                cloudStatus.className = "text-[9px] text-orange-500 uppercase font-black tracking-widest";
-                return;
-            }
+            console.log("Starting Firebase with config:", firebaseConfig);
 
             try {
-                const firebaseConfig = JSON.parse(__firebase_config);
-                const app = initializeApp(firebaseConfig);
+                const config = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : firebaseConfig;
+                const app = initializeApp(config);
                 const auth = getAuth(app);
                 const db = getFirestore(app);
                 const appId = typeof __app_id !== 'undefined' ? __app_id : 'smart-json-pro';
@@ -46,6 +50,7 @@
                 window.firestoreUtils = { collection, addDoc, onSnapshot, query, deleteDoc, doc, serverTimestamp };
 
                 await signInAnonymously(auth);
+                console.log("Anonymous sign-in successful");
 
                 onAuthStateChanged(auth, (user) => {
                     if (user) {
