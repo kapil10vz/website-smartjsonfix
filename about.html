@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SmartJSONFix — Free Online JSON Validator, Formatter & Auto-Repair Tool</title>
+<meta name="description" content="Free browser-based JSON validator, formatter, beautifier, minifier, and auto-repair tool. Fix trailing commas, missing quotes, single quotes, and broken JSON instantly. No signup, no upload." />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+<link rel="canonical" href="https://smartjsonfix.com/about.html" />
+
+<!-- Open Graph / social -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="SmartJSONFix — Free Online JSON Validator & Auto-Repair Tool" />
+<meta property="og:description" content="Validate, format, beautify, minify, and auto-repair broken JSON in your browser. Free, no signup." />
+<meta property="og:url" content="https://smartjsonfix.com/about.html" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=JetBrains+Mono:wght@400;600&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg: #0e1116;
+    --bg-soft: #151a22;
+    --bg-card: #1a2029;
+    --border: #232a35;
+    --text: #e6e9ef;
+    --text-dim: #8a93a3;
+    --accent: #ffb547;
+    --accent-soft: rgba(255, 181, 71, 0.12);
+    --good: #5fd693;
+    --bad: #ff6b6b;
+    --serif: "Fraunces", Georgia, serif;
+    --sans: "Inter Tight", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+    --maxw: 880px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(255,181,71,0.06) 0%, transparent 40%),
+      radial-gradient(circle at 85% 30%, rgba(95,214,147,0.04) 0%, transparent 35%);
+  }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+  header.hero { padding: 80px 0 56px; border-bottom: 1px solid var(--border); }
+  .logo { font-family: var(--mono); font-size: 14px; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 24px; }
+  .logo::before { content: "{ "; color: var(--text-dim); }
+  .logo::after { content: " }"; color: var(--text-dim); }
+  h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(36px, 5vw, 56px); line-height: 1.05; margin: 0 0 24px; letter-spacing: -0.02em; }
+  h1 em { font-style: italic; color: var(--accent); font-weight: 500; }
+  .lede { font-size: 19px; color: var(--text-dim); max-width: 640px; margin: 0 0 32px; }
+  .lede strong { color: var(--text); font-weight: 500; }
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .cta { display: inline-block; padding: 14px 22px; border-radius: 8px; text-decoration: none; font-weight: 500; font-size: 15px; transition: transform 0.15s, background 0.15s; }
+  .cta-primary { background: var(--accent); color: #1a1408; }
+  .cta-primary:hover { transform: translateY(-1px); background: #ffc46b; }
+  .cta-secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .cta-secondary:hover { border-color: var(--accent); color: var(--accent); }
+  .meta { font-family: var(--mono); font-size: 12px; color: var(--text-dim); margin-top: 40px; }
+
+  section { padding: 64px 0; border-bottom: 1px solid var(--border); }
+  h2 { font-family: var(--serif); font-weight: 600; font-size: 32px; margin: 0 0 8px; letter-spacing: -0.01em; }
+  h2 + .section-sub { color: var(--text-dim); font-size: 16px; margin: 0 0 32px; }
+  h3 { font-family: var(--sans); font-size: 19px; font-weight: 600; margin: 32px 0 8px; }
+  p { margin: 0 0 16px; }
+  a { color: var(--accent); }
+  pre { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 16px 18px; overflow-x: auto; font-family: var(--mono); font-size: 13.5px; line-height: 1.6; margin: 12px 0; }
+  code { font-family: var(--mono); font-size: 0.92em; }
+  p code { background: var(--accent-soft); color: var(--accent); padding: 2px 6px; border-radius: 4px; font-size: 0.88em; }
+  ul, ol { padding-left: 24px; }
+  li { margin-bottom: 6px; }
+
+  details { border-bottom: 1px solid var(--border); padding: 18px 0; }
+  details[open] summary { color: var(--accent); }
+  summary { cursor: pointer; font-size: 17px; font-weight: 500; list-style: none; padding-right: 24px; position: relative; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; position: absolute; right: 0; top: 0; font-family: var(--mono); color: var(--text-dim); transition: transform 0.2s; }
+  details[open] summary::after { content: "−"; color: var(--accent); }
+  details p { margin-top: 12px; }
+
+  footer { padding: 48px 0; color: var(--text-dim); font-size: 14px; }
+  footer a { color: var(--text-dim); }
+  footer a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="logo">SmartJSONFix</div>
+    <h1>Validate, format, and <em>repair</em> broken JSON in your browser.</h1>
+    <p class="lede"><strong>SmartJSONFix is a free, browser-based JSON validator, formatter, and auto-repair tool.</strong> Paste broken JSON — trailing commas, single quotes, missing brackets, Python-style values — and get clean, valid JSON in one click. No signup. No upload. Runs entirely in your browser.</p>
+    <div class="cta-row">
+      <a href="/" class="cta cta-primary">Open the editor →</a>
+      <a href="#how-it-works" class="cta cta-secondary">How it works</a>
+    </div>
+    <div class="meta">Last updated: May 2026 · v2.x · MIT-licensed front-end</div>
+  </div>
+</header>
+
+<section id="how-it-works">
+  <div class="wrap">
+    <h2>How to fix broken JSON in four steps</h2>
+    <p class="section-sub">Average time to repair: under 30 seconds.</p>
+    <ol>
+      <li><strong>Paste</strong> your malformed JSON into the <em>Raw Input</em> panel.</li>
+      <li><strong>Click</strong> <code>Fix &amp; Format</code>. SmartJSONFix highlights the error line and explains it.</li>
+      <li><strong>Review</strong> the corrected output in the <em>Formatted Result</em> panel.</li>
+      <li><strong>Copy</strong> the fixed JSON, or click <em>Save</em> to keep the snippet locally for later.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>Is SmartJSONFix free?</summary>
+      <p>Yes — 100% free. No signup, no paywall, no rate-limit gate.</p>
+    </details>
+    <details>
+      <summary>Is my JSON data uploaded to a server?</summary>
+      <p>No. SmartJSONFix runs entirely in your browser. The JSON you paste never leaves your device.</p>
+    </details>
+    <details>
+      <summary>Can SmartJSONFix repair invalid JSON automatically?</summary>
+      <p>Yes. It auto-repairs trailing commas, single quotes, unquoted keys, Python literals, and bracket balancing.</p>
+    </details>
+    <details>
+      <summary>Does SmartJSONFix work on mobile?</summary>
+      <p>Yes — desktop, tablet, and mobile browsers fully supported.</p>
+    </details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    © 2026 SmartJSONFix.com · Free JSON validator, formatter &amp; auto-repair tool ·
+    <a href="/">Editor</a> ·
+    <a href="/privacy.html">Privacy</a> ·
+    <a href="/terms.html">Terms</a>
+  </div>
+</footer>
+
+</body>
+</html>
