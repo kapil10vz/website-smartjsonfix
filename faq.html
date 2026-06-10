@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="JSON FAQ - Frequently asked questions about JSON formatting, validation, and fixing. Get answers to common JSON problems.">
+    <meta name="keywords" content="JSON FAQ, JSON questions, JSON answers, JSON help, JSON troubleshooting">
+    <meta name="author" content="SmartJSON">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="JSON FAQ - Common Questions & Answers">
+    <meta property="og:description" content="Find answers to frequently asked questions about JSON syntax, formatting, validation, and best practices">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://smartjsonfix.com/faq.html">
+    <title>JSON FAQ | Frequently Asked Questions</title>
+    <link rel="canonical" href="https://smartjsonfix.com/faq.html">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8966173018783583" crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-50HM5CH2JC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-50HM5CH2JC');
+    </script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; margin: 0; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .dot { height: 8px; width: 8px; background-color: #10b981; border-radius: 50%; display: inline-block; margin-right: 8px; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); } 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); } }
+        code { background-color: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+    <div class="bg-slate-900 text-white text-[10px] py-2 text-center uppercase tracking-widest font-bold">
+        <span class="dot"></span> JSON Frequently Asked Questions
+    </div>
+
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="/" class="flex items-center space-x-3 hover:opacity-80 transition">
+                    <div class="bg-emerald-600 text-white p-2 rounded-lg font-bold text-xl leading-none">{ }</div>
+                    <div>
+                        <h2 class="font-bold text-slate-900 leading-tight">SmartJSON Pro</h2>
+                        <p class="text-[9px] text-slate-400 uppercase font-black tracking-widest">FAQ</p>
+                    </div>
+                </a>
+            </div>
+            <div class="flex items-center space-x-2">
+                <a href="/" class="text-xs font-bold bg-slate-100 px-4 py-2 rounded-lg hover:bg-slate-200 transition">Back to Tool</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto w-full p-4 lg:p-6 flex-grow">
+        <h1 class="text-4xl font-bold text-slate-900 mb-8">Frequently Asked Questions</h1>
+
+        <div class="space-y-6">
+            <!-- FAQ 1 -->
+            <details class="bg-white border border-slate-200 rounded-lg p-6 cursor-pointer hover:shadow-md transition" open>
+                <summary class="font-bold text-slate-900 text-lg mb-3">What is JSON and why is it used?</summary>
+                <div class="text-slate-600 space-y-3 mt-4">
+                    <p>JSON (JavaScript Object Notation) is a lightweight, text-based data format designed for easy data interchange between systems. It's based on key-value pairs and arrays, making it both human-readable and machine-parseable.</p>
+                    <p><strong>Why JSON is popular:</strong></p>
+                    <ul class="list-disc list-inside space-y-1 text-sm">
+                        <li>Language-independent: Works with any programming language</li>
+                        <li>Lightweight: Smaller file size than alternatives like XML</li>
+                        <li>Easy to parse: Native support in JavaScript and all modern browsers</li>
+                        <li>Web-native: The standard format for web APIs and REST services</li>
+                        <li>Standardized: Clear, well-defined specification</li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- FAQ 2 -->
+            <details class="bg-white border border-slate-200 rounded-lg p-6 cursor-pointer hover:shadow-md transition">
+                <summary class="font-bold text-slate-900 text-lg mb-3">What's the difference between JSON and JavaScript objects?</summary>
+                <div class="text-slate-600 space-y-3 mt-4">
+                    <p>While similar in syntax, JSON and JavaScript objects have important differences:</p>
+                    <p><strong>JSON:</strong></p>
+                    <ul class="list-disc list-inside text-sm space-y-1">
+                        <li>A data format (text-based)</li>
+                        <li>Requires double quotes for all keys and string values</li>
+                        <li>Cannot contain functions or methods</li>
+                        <li>Cannot contain undefined values</li>
+                        <li>Cannot contain comments</li>
+                    </ul>
+                    <p><strong>JavaScript Objects:</strong></p>
+                    <ul class="list-disc list-inside text-sm space-y-1">
+                        <li>Actual programming objects in JavaScript</li>
+                        <li>Can use single or double quotes (or no quotes for valid identifiers)</li>
+                        <li>Can contain functions and methods</li>
+                        <li>Can contain undefined values</li>
+                        <li>Can contain comments</li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- FAQ 3 -->
+            <details class="bg-white border border-slate-200 rounded-lg p-6 cursor-pointer hover:shadow-md transition">
+                <summary class="font-bold text-slate-900 text-lg mb-3">Why do I get "Invalid JSON" errors?</summary>
+                <div class="text-slate-600 space-y-3 mt-4">
+                    <p>Invalid JSON errors occur when your JSON doesn't follow the strict syntax rules. Most common causes:</p>
+                    <ul class="space-y-2 text-sm">
+                        <li><strong>Single quotes:</strong> Use double quotes instead of single quotes</li>
+                        <li><strong>Trailing commas:</strong> Remove commas after the last item in objects or arrays</li>
+                        <li><strong>Unquoted keys:</strong> All keys must be in double quotes</li>
+                        <li><strong>Comments:</strong> Standard JSON doesn't support // or /* */ comments</li>
+                        <li><strong>Unescaped characters:</strong> Special chars like backslashes must be escaped as \\</li>
+                        <li><strong>Unmatched braces:</strong> Ensure all { have matching }, all [ have matching ]</li>
+                    </ul>
+                    <p class="text-sm">SmartJSON Pro can automatically fix many of these issues with the Auto-Repair feature.</p>
+                </div>
+            </details>
+
+            <!-- FAQ 4 -->
+            <details class="bg-white border border-slate-200 rounded-lg p-6 cursor-pointer hover:shadow-md transition">
+                <summary class="font-bold text-slate-900 text-lg mb-3">How do I include special characters in JSON strings?</summary>
+                <div class="text-slate-600 space-y-3 mt-4">
+                    <p>Special characters must be escaped using a backslash (\) in JSON strings:</p>
+                    <ul class="space-y-2 text-sm font-mono bg-slate-50 p-3 rounded">
+                        <li><code>\"</code> - Double quote</li>
+                        <li><code>\\</code> - Backslash</li>
+                        <li><code>\/</code> - Forward slash (optional)</li>
+                        <li><code>\n</code> - Newline</li>
+                        <li><code>\r</code> - Carriage return</li>
+                        <li><code>\t</code> - Tab</li>
+                        <li><code>\b</code> - Backspace</li>
+                        <li><code>\f</code> - Form feed</li>
+                        <li><code>\uXXXX</code> - Unicode character (where XXXX is the hex code)</li>
+                    </ul>
+                    <p class="text-sm mt-3">Example: <code>{"text": "Line 1\\nLine 2\\t\"quoted\""}</code></p>
+                </div>
+            </details>
+
+            <!-- FAQ 5 -->
+            <details class="bg-white border border-slate-200 rounded-lg p-6 cursor-pointer hover:shadow-md transition">
+                <summary class="font-bold text-slate-900 text-lg mb-3">Can I use null in JSON? What does it mean?</summary>
+                <div class="text-slate-600 space-y-3 mt-4">
+                    <p>Yes, <code>null</code> is a valid JSON value that represents the absence of data or a missing value.</p>
+                    <p><strong>When to use null:</strong></p>
+                    <ul class="list-disc list-inside space-y-1 text-sm">
+                        <li>When a value is intentionally empty or undefined</li>
+                        <li>When optional fields don't have values</li>
+                        <li>To represent "no value" as opposed to an empty string or zero</li>
+                    </ul>
+                    <p class="text-sm">Example:</p>
+                    <pre class="bg-slate-900 text-slate-100 p-3 rounded text-sm overflow-x-auto">
+{
+  "name": "John",
+  "middleName": null,
+  "age": 30,
+  "nickname": null
+}</pre>
+                    <p class="text-sm mt-3">Note: null (lowercase, no quotes) is different from the string "null".</p>
+                </div>
+            </details>
+
+            <!-- FAQ 6 -->
+            <details class="bg-white border border-slate-200 rounded-lg p-6 cursor-pointer hover:shadow-md transition">
+                <summary class="font-bold text-slate-900 text-lg mb-3">What's the difference between 2-space and 4-space indentation?</summary>
+                <div class="text-slate-600 space-y-3 mt-4">
+                    <p>Both 2-space and 4-space indentation are valid ways to format JSON. The choice is typically based on:</p>
+                    <ul class="list-disc list-inside space-y-1 text-sm">
+                        <li><strong>2-space:</strong> More compact, popular in web/JavaScript projects (like Node.js, React)</li>
+                        <li><strong>4-space:</strong> More explicit, traditional in many backend languages (Java, Python, C#)</li>
+                    </ul>
+                    <p class="text-sm mt-3">The key is consistency—pick one style and use it throughout your project. Both are equally valid JSON.</p>
+                </div>
+            </details>
+
+            <!-- FAQ 7 -->
+            <details class="bg-white border border-slate-200 rounded-lg p-6 cursor-pointer hover:shadow-md transition">
+                <summary class="font-bold text-slate-900 text-lg mb-3">How do I handle dates in JSON?</summary>
+                <div class="text-slate-600 space-y-3 mt-4">
+                    <p>JSON doesn't have a native date type, so dates are typically stored as strings. The recommended format is ISO 8601:</p>
+                    <p class="text-sm font-mono bg-slate-50 p-3 rounded"><code>"2026-06-09T14:30:00Z"</code></p>
+                    <p><strong>Other date formats:</strong></p>
+                    <ul class="space-y-2 text-sm">
+                        <li><code>"2026-06-09"</code> - Date only (ISO 8601)</li>
+                        <li><code>1686312600</code> - Unix timestamp (seconds since Jan 1, 1970)</li>
+                        <li><code>1686312600000</code> - Unix timestamp in milliseconds</li>
+                    </ul>
+                    <p class="text-sm mt-3">ISO 8601 is recommended because it's human-readable, universally understood, and includes timezone information.</p>
+                </div>
+            </details>
+
+            <!-- FAQ 8 -->
+            <details class="bg-white border border-slate-200 rounded-lg p-6 cursor-pointer hover:shadow-md transition">
+                <summary class="font-bold text-slate-900 text-lg mb-3">Is JSON case-sensitive?</summary>
+                <div class="text-slate-600 space-y-3 mt-4">
+                    <p><strong>Yes, JSON is case-sensitive.</strong> This applies to both keys and values:</p>
+                    <ul class="space-y-2 text-sm">
+                        <li><code>"Name"</code> and <code>"name"</code> are different keys</li>
+                        <li><code>true</code>, <code>True</code>, and <code>TRUE</code> are different (only <code>true</code> is valid JSON)</li>
+                        <li><code>null</code>, <code>Null</code>, and <code>NULL</code> are different (only <code>null</code> is valid JSON)</li>
+                    </ul>
+                    <p class="text-sm mt-3">This is why AutoRepair features must be careful when fixing JSON—they can't automatically change case.</p>
+                </div>
+            </details>
+
+            <!-- FAQ 9 -->
+            <details class="bg-white border border-slate-200 rounded-lg p-6 cursor-pointer hover:shadow-md transition">
+                <summary class="font-bold text-slate-900 text-lg mb-3">What is JSON Schema?</summary>
+                <div class="text-slate-600 space-y-3 mt-4">
+                    <p>JSON Schema is a standardized way to describe and validate JSON data structure. It defines:</p>
+                    <ul class="list-disc list-inside space-y-1 text-sm">
+                        <li>Required and optional fields</li>
+                        <li>Data types for each field</li>
+                        <li>Constraints like minimum/maximum values or string length</li>
+                        <li>Complex validation rules</li>
+                    </ul>
+                    <p class="text-sm mt-3">Example schema defining a user object:</p>
+                    <pre class="bg-slate-900 text-slate-100 p-3 rounded text-sm overflow-x-auto">
+{
+  "type": "object",
+  "properties": {
+    "name": { "type": "string" },
+    "age": { "type": "integer", "minimum": 0 }
+  },
+  "required": ["name"]
+}</pre>
+                    <p class="text-sm mt-3">Learn more at: <a href="https://json-schema.org" class="text-emerald-600 hover:underline">json-schema.org</a></p>
+                </div>
+            </details>
+
+            <!-- FAQ 10 -->
+            <details class="bg-white border border-slate-200 rounded-lg p-6 cursor-pointer hover:shadow-md transition">
+                <summary class="font-bold text-slate-900 text-lg mb-3">How large can JSON files be?</summary>
+                <div class="text-slate-600 space-y-3 mt-4">
+                    <p>Technically, JSON has no size limit, but practical limits depend on:</p>
+                    <ul class="list-disc list-inside space-y-1 text-sm">
+                        <li><strong>Memory:</strong> Must fit in available RAM to parse</li>
+                        <li><strong>Browser:</strong> JavaScript engines have different limits; modern browsers handle 100MB+</li>
+                        <li><strong>Network:</strong> Large files take longer to transfer; consider compression (gzip)</li>
+                        <li><strong>Performance:</strong> Very large JSON should be streamed or chunked</li>
+                    </ul>
+                    <p class="text-sm mt-3">For web APIs, it's best practice to paginate large datasets rather than returning everything in one JSON response.</p>
+                </div>
+            </details>
+
+            <!-- FAQ 11 -->
+            <details class="bg-white border border-slate-200 rounded-lg p-6 cursor-pointer hover:shadow-md transition">
+                <summary class="font-bold text-slate-900 text-lg mb-3">Can JSON contain functions or executable code?</summary>
+                <div class="text-slate-600 space-y-3 mt-4">
+                    <p><strong>No, pure JSON cannot contain functions or executable code.</strong> JSON is strictly a data format.</p>
+                    <p>However, if you need to store code or functions:</p>
+                    <ul class="list-disc list-inside space-y-1 text-sm">
+                        <li>Store code as a string in JSON</li>
+                        <li>Use JSONP (JSON with Padding) for loading functions</li>
+                        <li>Use alternatives like JavaScript objects, YAML, or TOML</li>
+                        <li>Evaluate code separately after JSON is loaded (use eval() carefully!)</li>
+                    </ul>
+                    <p class="text-sm mt-3 text-red-600"><strong>Security Warning:</strong> Never eval() untrusted code. This is a major security vulnerability.</p>
+                </div>
+            </details>
+
+            <!-- FAQ 12 -->
+            <details class="bg-white border border-slate-200 rounded-lg p-6 cursor-pointer hover:shadow-md transition">
+                <summary class="font-bold text-slate-900 text-lg mb-3">What's the best way to store and organize large JSON data?</summary>
+                <div class="text-slate-600 space-y-3 mt-4">
+                    <p><strong>For large JSON datasets, consider:</strong></p>
+                    <ul class="space-y-2 text-sm">
+                        <li><strong>Databases:</strong> Store in MongoDB, Firebase, or other JSON-native databases</li>
+                        <li><strong>Pagination:</strong> Return data in chunks with pagination</li>
+                        <li><strong>Compression:</strong> Use gzip compression for transmission</li>
+                        <li><strong>Minification:</strong> Remove whitespace in production</li>
+                        <li><strong>Streaming:</strong> Use streaming JSON parsers for very large files</li>
+                        <li><strong>Caching:</strong> Cache frequently accessed JSON data</li>
+                    </ul>
+                    <p class="text-sm mt-3">For development, formatted JSON with indentation makes debugging easier. For production, minified JSON reduces file size.</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- AdSense Ad -->
+        <div class="my-8">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-8966173018783583"
+                 data-ad-slot="8818564998"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <!-- Additional Resources -->
+        <section class="mt-12 bg-slate-50 border border-slate-200 rounded-lg p-6">
+            <h2 class="text-2xl font-bold text-slate-900 mb-4">Need More Help?</h2>
+            <ul class="space-y-2 text-slate-600">
+                <li><a href="/guide.html" class="text-emerald-600 hover:underline">→ Read the Complete JSON Guide</a></li>
+                <li><a href="/" class="text-emerald-600 hover:underline">→ Use SmartJSON Pro to format your JSON</a></li>
+                <li><a href="https://www.json.org/" target="_blank" rel="noopener noreferrer" class="text-emerald-600 hover:underline">→ Official JSON Specification</a></li>
+                <li><a href="https://json-schema.org/" target="_blank" rel="noopener noreferrer" class="text-emerald-600 hover:underline">→ Learn about JSON Schema</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-10 mt-6">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col items-center">
+            <p class="text-[10px] text-slate-400 font-semibold flex items-center flex-wrap justify-center gap-x-3">
+                <span>&copy; 2026 SmartJSONFix.com. All rights reserved.</span>
+                <span class="text-slate-300">&middot;</span>
+                <a href="/" class="hover:text-slate-600 transition">JSON Tool</a>
+                <span class="text-slate-300">&middot;</span>
+                <a href="/guide.html" class="hover:text-slate-600 transition">Guide</a>
+                <span class="text-slate-300">&middot;</span>
+                <a href="/faq.html" class="hover:text-slate-600 transition">FAQ</a>
+                <span class="text-slate-300">&middot;</span>
+                <a href="/privacy.html" class="hover:text-slate-600 transition">Privacy</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

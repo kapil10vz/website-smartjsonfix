@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete JSON Guide - Learn JSON syntax, best practices, validation, and formatting. Master JSON data interchange for APIs and web development.">
+    <meta name="keywords" content="JSON guide, JSON tutorial, JSON syntax, JSON examples, JSON validation, JSON formatting">
+    <meta name="author" content="SmartJSON">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="JSON Guide - Learn JSON Data Format Basics">
+    <meta property="og:description" content="Complete guide to JSON syntax, structure, validation, and best practices for web developers">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://smartjsonfix.com/guide.html">
+    <title>JSON Guide | Learn JSON Syntax & Best Practices</title>
+    <link rel="canonical" href="https://smartjsonfix.com/guide.html">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8966173018783583" crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-50HM5CH2JC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-50HM5CH2JC');
+    </script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; margin: 0; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .dot { height: 8px; width: 8px; background-color: #10b981; border-radius: 50%; display: inline-block; margin-right: 8px; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); } 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); } }
+        code { background-color: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; }
+        pre { background-color: #1e293b; color: #e2e8f0; padding: 16px; border-radius: 8px; overflow-x: auto; }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+    <div class="bg-slate-900 text-white text-[10px] py-2 text-center uppercase tracking-widest font-bold">
+        <span class="dot"></span> JSON Education & Formatting
+    </div>
+
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="/" class="flex items-center space-x-3 hover:opacity-80 transition">
+                    <div class="bg-emerald-600 text-white p-2 rounded-lg font-bold text-xl leading-none">{ }</div>
+                    <div>
+                        <h2 class="font-bold text-slate-900 leading-tight">SmartJSON Pro</h2>
+                        <p class="text-[9px] text-slate-400 uppercase font-black tracking-widest">Guide</p>
+                    </div>
+                </a>
+            </div>
+            <div class="flex items-center space-x-2">
+                <a href="/" class="text-xs font-bold bg-slate-100 px-4 py-2 rounded-lg hover:bg-slate-200 transition">Back to Tool</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto w-full p-4 lg:p-6 flex-grow">
+        <h1 class="text-4xl font-bold text-slate-900 mb-6">Complete JSON Guide</h1>
+
+        <!-- Table of Contents -->
+        <nav class="bg-slate-50 border border-slate-200 rounded-lg p-6 mb-8">
+            <h2 class="font-bold text-slate-900 mb-4">Table of Contents</h2>
+            <ul class="space-y-2 text-sm">
+                <li><a href="#introduction" class="text-emerald-600 hover:underline">Introduction to JSON</a></li>
+                <li><a href="#syntax" class="text-emerald-600 hover:underline">JSON Syntax & Data Types</a></li>
+                <li><a href="#structure" class="text-emerald-600 hover:underline">Understanding JSON Structure</a></li>
+                <li><a href="#validation" class="text-emerald-600 hover:underline">JSON Validation</a></li>
+                <li><a href="#formatting" class="text-emerald-600 hover:underline">Formatting & Indentation</a></li>
+                <li><a href="#errors" class="text-emerald-600 hover:underline">Common Errors & Fixes</a></li>
+                <li><a href="#best-practices" class="text-emerald-600 hover:underline">Best Practices</a></li>
+            </ul>
+        </nav>
+
+        <!-- Introduction -->
+        <section id="introduction" class="mb-12">
+            <h2 class="text-2xl font-bold text-slate-900 mb-4">Introduction to JSON</h2>
+            <p class="text-slate-600 mb-4">JSON (JavaScript Object Notation) is a lightweight, text-based data format that is language-independent and widely used for data interchange between web applications, APIs, and services.</p>
+
+            <h3 class="text-lg font-bold text-slate-900 mb-2 mt-6">Why JSON?</h3>
+            <ul class="space-y-2 text-slate-600 mb-4">
+                <li><strong>Human-readable:</strong> Easy for humans to read and write</li>
+                <li><strong>Lightweight:</strong> Minimal overhead compared to XML</li>
+                <li><strong>Language-independent:</strong> Supported by virtually all programming languages</li>
+                <li><strong>Structured:</strong> Clear hierarchical organization of data</li>
+                <li><strong>Web-native:</strong> Native support in JavaScript and all modern browsers</li>
+            </ul>
+        </section>
+
+        <!-- Syntax & Data Types -->
+        <section id="syntax" class="mb-12">
+            <h2 class="text-2xl font-bold text-slate-900 mb-4">JSON Syntax & Data Types</h2>
+            <p class="text-slate-600 mb-4">JSON supports six data types that can be used to represent different kinds of values:</p>
+
+            <h3 class="text-lg font-bold text-slate-900 mb-2 mt-6">1. String</h3>
+            <p class="text-slate-600 mb-2">Text values enclosed in double quotes</p>
+            <pre class="mb-4"><code>"name": "John Doe"
+"description": "A JSON string value"</code></pre>
+
+            <h3 class="text-lg font-bold text-slate-900 mb-2 mt-6">2. Number</h3>
+            <p class="text-slate-600 mb-2">Integer or floating-point values (no quotes)</p>
+            <pre class="mb-4"><code>"age": 30
+"price": 19.99
+"temperature": -5</code></pre>
+
+            <h3 class="text-lg font-bold text-slate-900 mb-2 mt-6">3. Boolean</h3>
+            <p class="text-slate-600 mb-2">True or false values (lowercase, no quotes)</p>
+            <pre class="mb-4"><code>"active": true
+"isAdmin": false</code></pre>
+
+            <h3 class="text-lg font-bold text-slate-900 mb-2 mt-6">4. Null</h3>
+            <p class="text-slate-600 mb-2">Represents absence of value</p>
+            <pre class="mb-4"><code>"middleName": null</code></pre>
+
+            <h3 class="text-lg font-bold text-slate-900 mb-2 mt-6">5. Array</h3>
+            <p class="text-slate-600 mb-2">Ordered collection of values enclosed in square brackets</p>
+            <pre class="mb-4"><code>"tags": ["javascript", "json", "web"]
+"numbers": [1, 2, 3, 4, 5]</code></pre>
+
+            <h3 class="text-lg font-bold text-slate-900 mb-2 mt-6">6. Object</h3>
+            <p class="text-slate-600 mb-2">Unordered collection of key-value pairs enclosed in curly braces</p>
+            <pre class="mb-4"><code>{
+  "name": "John",
+  "age": 30,
+  "address": {
+    "street": "123 Main St",
+    "city": "New York"
+  }
+}</code></pre>
+        </section>
+
+        <!-- Structure -->
+        <section id="structure" class="mb-12">
+            <h2 class="text-2xl font-bold text-slate-900 mb-4">Understanding JSON Structure</h2>
+
+            <h3 class="text-lg font-bold text-slate-900 mb-2 mt-6">JSON Objects</h3>
+            <p class="text-slate-600 mb-2">Objects contain key-value pairs separated by colons:</p>
+            <pre class="mb-4"><code>{
+  "key1": "value1",
+  "key2": "value2",
+  "key3": 123
+}</code></pre>
+
+            <h3 class="text-lg font-bold text-slate-900 mb-2 mt-6">JSON Arrays</h3>
+            <p class="text-slate-600 mb-2">Arrays contain ordered elements of any type:</p>
+            <pre class="mb-4"><code>[
+  "string value",
+  123,
+  true,
+  null,
+  { "object": "inside array" }
+]</code></pre>
+
+            <h3 class="text-lg font-bold text-slate-900 mb-2 mt-6">Nested Structures</h3>
+            <p class="text-slate-600 mb-2">Objects and arrays can be nested to any depth:</p>
+            <pre class="mb-4"><code>{
+  "users": [
+    {
+      "id": 1,
+      "name": "Alice",
+      "roles": ["admin", "user"]
+    },
+    {
+      "id": 2,
+      "name": "Bob",
+      "roles": ["user"]
+    }
+  ]
+}</code></pre>
+        </section>
+
+        <!-- Validation -->
+        <section id="validation" class="mb-12">
+            <h2 class="text-2xl font-bold text-slate-900 mb-4">JSON Validation</h2>
+            <p class="text-slate-600 mb-4">Validation ensures JSON conforms to the correct syntax and structure. Valid JSON must follow strict rules:</p>
+            <ul class="space-y-2 text-slate-600 mb-4">
+                <li>✓ Must start and end with braces <code>{}</code> or brackets <code>[]</code></li>
+                <li>✓ All keys must be strings enclosed in double quotes</li>
+                <li>✓ String values must be enclosed in double quotes</li>
+                <li>✓ Numbers cannot be quoted</li>
+                <li>✓ Booleans and null cannot be quoted</li>
+                <li>✓ No trailing commas after the last element</li>
+                <li>✓ No single quotes allowed</li>
+                <li>✓ All braces, brackets, and parentheses must be properly matched</li>
+            </ul>
+
+            <h3 class="text-lg font-bold text-slate-900 mb-2 mt-6">Valid vs Invalid JSON</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div class="bg-green-50 border border-green-200 p-4 rounded">
+                    <h4 class="font-bold text-green-900 mb-2">✓ Valid</h4>
+                    <pre><code class="text-sm">{
+  "name": "Alice",
+  "age": 28,
+  "active": true
+}</code></pre>
+                </div>
+                <div class="bg-red-50 border border-red-200 p-4 rounded">
+                    <h4 class="font-bold text-red-900 mb-2">✗ Invalid</h4>
+                    <pre><code class="text-sm">{
+  name: "Alice",
+  'age': 28,
+  "active": true,
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formatting -->
+        <section id="formatting" class="mb-12">
+            <h2 class="text-2xl font-bold text-slate-900 mb-4">Formatting & Indentation</h2>
+            <p class="text-slate-600 mb-4">Proper formatting makes JSON easier to read and debug. The most common indentation sizes are 2 or 4 spaces.</p>
+
+            <h3 class="text-lg font-bold text-slate-900 mb-2 mt-6">2-Space Indentation</h3>
+            <pre class="mb-4"><code>{
+  "user": {
+    "id": 1,
+    "name": "John",
+    "email": "john@example.com"
+  }
+}</code></pre>
+
+            <h3 class="text-lg font-bold text-slate-900 mb-2 mt-6">4-Space Indentation</h3>
+            <pre class="mb-4"><code>{
+    "user": {
+        "id": 1,
+        "name": "John",
+        "email": "john@example.com"
+    }
+}</code></pre>
+
+            <h3 class="text-lg font-bold text-slate-900 mb-2 mt-6">Minified (No Whitespace)</h3>
+            <p class="text-slate-600 mb-2">Compact format used for efficient data transfer:</p>
+            <pre class="mb-4"><code>{"user":{"id":1,"name":"John","email":"john@example.com"}}</code></pre>
+        </section>
+
+        <!-- Common Errors -->
+        <section id="errors" class="mb-12">
+            <h2 class="text-2xl font-bold text-slate-900 mb-4">Common JSON Errors & Fixes</h2>
+
+            <div class="space-y-6">
+                <div class="bg-white border border-slate-200 p-4 rounded-lg">
+                    <h3 class="font-bold text-slate-900 mb-2">1. Single Quotes Instead of Double Quotes</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-xs text-red-600 font-bold mb-1">❌ Wrong</p>
+                            <pre><code class="text-sm">{'name': 'John'}</code></pre>
+                        </div>
+                        <div>
+                            <p class="text-xs text-green-600 font-bold mb-1">✓ Correct</p>
+                            <pre><code class="text-sm">{"name": "John"}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-slate-200 p-4 rounded-lg">
+                    <h3 class="font-bold text-slate-900 mb-2">2. Trailing Commas</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-xs text-red-600 font-bold mb-1">❌ Wrong</p>
+                            <pre><code class="text-sm">{
+  "name": "John",
+  "age": 30,
+}</code></pre>
+                        </div>
+                        <div>
+                            <p class="text-xs text-green-600 font-bold mb-1">✓ Correct</p>
+                            <pre><code class="text-sm">{
+  "name": "John",
+  "age": 30
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-slate-200 p-4 rounded-lg">
+                    <h3 class="font-bold text-slate-900 mb-2">3. Unquoted Keys</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-xs text-red-600 font-bold mb-1">❌ Wrong</p>
+                            <pre><code class="text-sm">{name: "John"}</code></pre>
+                        </div>
+                        <div>
+                            <p class="text-xs text-green-600 font-bold mb-1">✓ Correct</p>
+                            <pre><code class="text-sm">{"name": "John"}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-slate-200 p-4 rounded-lg">
+                    <h3 class="font-bold text-slate-900 mb-2">4. Comments (Not Allowed)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-xs text-red-600 font-bold mb-1">❌ Wrong</p>
+                            <pre><code class="text-sm">{
+  "name": "John", // user name
+  "age": 30       /* age in years */
+}</code></pre>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-600 font-bold mb-1">ℹ Solution</p>
+                            <p class="text-sm text-slate-600">Use documentation or JSON5. Standard JSON doesn't support comments.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-slate-200 p-4 rounded-lg">
+                    <h3 class="font-bold text-slate-900 mb-2">5. Unescaped Special Characters</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-xs text-red-600 font-bold mb-1">❌ Wrong</p>
+                            <pre><code class="text-sm">{"path": "C:\Users\John"}</code></pre>
+                        </div>
+                        <div>
+                            <p class="text-xs text-green-600 font-bold mb-1">✓ Correct</p>
+                            <pre><code class="text-sm">{"path": "C:\\Users\\John"}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Best Practices -->
+        <section id="best-practices" class="mb-12">
+            <h2 class="text-2xl font-bold text-slate-900 mb-4">JSON Best Practices</h2>
+
+            <div class="space-y-4">
+                <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-lg">
+                    <h3 class="font-bold text-emerald-900 mb-2">1. Use Consistent Naming Conventions</h3>
+                    <p class="text-sm text-slate-600">Choose between camelCase, snake_case, or kebab-case and stick with it throughout your JSON data.</p>
+                </div>
+
+                <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-lg">
+                    <h3 class="font-bold text-emerald-900 mb-2">2. Keep Nesting Reasonable</h3>
+                    <p class="text-sm text-slate-600">Avoid deeply nested structures (more than 3-4 levels). Flatten when possible for better readability and performance.</p>
+                </div>
+
+                <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-lg">
+                    <h3 class="font-bold text-emerald-900 mb-2">3. Use Descriptive Key Names</h3>
+                    <p class="text-sm text-slate-600">Avoid abbreviations and single-letter keys. Use clear, self-documenting names like "firstName" instead of "fn".</p>
+                </div>
+
+                <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-lg">
+                    <h3 class="font-bold text-emerald-900 mb-2">4. Validate Early and Often</h3>
+                    <p class="text-sm text-slate-600">Validate JSON at system boundaries (API inputs, file loads) to catch errors early in the process.</p>
+                </div>
+
+                <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-lg">
+                    <h3 class="font-bold text-emerald-900 mb-2">5. Use Standard Data Types</h3>
+                    <p class="text-sm text-slate-600">Stick to the six JSON data types. Avoid storing complex types like dates as strings when possible, or use ISO 8601 format.</p>
+                </div>
+
+                <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-lg">
+                    <h3 class="font-bold text-emerald-900 mb-2">6. Document Your Schema</h3>
+                    <p class="text-sm text-slate-600">Provide documentation or JSON Schema to describe the structure, required fields, and data types of your JSON.</p>
+                </div>
+
+                <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-lg">
+                    <h3 class="font-bold text-emerald-900 mb-2">7. Use Null Appropriately</h3>
+                    <p class="text-sm text-slate-600">Use null to represent absence of value. Omitting keys entirely is also acceptable depending on your use case.</p>
+                </div>
+
+                <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-lg">
+                    <h3 class="font-bold text-emerald-900 mb-2">8. Format for Human Readability</h3>
+                    <p class="text-sm text-slate-600">Use indentation and whitespace during development. Use minified JSON only for production data transfer.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- AdSense Ad -->
+        <div class="my-8">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-8966173018783583"
+                 data-ad-slot="8818564998"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-10 mt-6">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col items-center">
+            <p class="text-[10px] text-slate-400 font-semibold flex items-center flex-wrap justify-center gap-x-3">
+                <span>&copy; 2026 SmartJSONFix.com. All rights reserved.</span>
+                <span class="text-slate-300">&middot;</span>
+                <a href="/" class="hover:text-slate-600 transition">JSON Tool</a>
+                <span class="text-slate-300">&middot;</span>
+                <a href="/guide.html" class="hover:text-slate-600 transition">Guide</a>
+                <span class="text-slate-300">&middot;</span>
+                <a href="/privacy.html" class="hover:text-slate-600 transition">Privacy Policy</a>
+                <span class="text-slate-300">&middot;</span>
+                <a href="/terms.html" class="hover:text-slate-600 transition">Terms of Service</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

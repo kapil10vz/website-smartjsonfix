@@ -147,6 +147,27 @@
     </header>
 
     <main class="max-w-7xl mx-auto w-full p-4 lg:p-6 flex-grow">
+        <!-- High-Quality Content Section -->
+        <section class="bg-gradient-to-r from-slate-50 to-emerald-50 border border-slate-200 rounded-xl p-6 lg:p-8 mb-8">
+            <h2 class="text-2xl font-bold text-slate-900 mb-4">SmartJSON Pro: Your Complete JSON Solution</h2>
+            <p class="text-slate-600 mb-4 leading-relaxed">JSON has become the standard data format for web applications, APIs, and data interchange. Whether you're debugging API responses, configuring applications, or working with data files, JSON formatting and validation are essential skills.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <div class="bg-white rounded-lg p-4 border border-slate-200">
+                    <h3 class="font-bold text-slate-900 mb-2">🔧 Auto-Repair</h3>
+                    <p class="text-xs text-slate-600">Automatically fix common JSON syntax errors including missing quotes, trailing commas, and unescaped characters.</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 border border-slate-200">
+                    <h3 class="font-bold text-slate-900 mb-2">✓ Validate</h3>
+                    <p class="text-xs text-slate-600">Validate JSON structure instantly with detailed error messages to identify exactly where syntax errors occur.</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 border border-slate-200">
+                    <h3 class="font-bold text-slate-900 mb-2">🎨 Format</h3>
+                    <p class="text-xs text-slate-600">Format messy JSON with customizable indentation (2 or 4 spaces) for improved readability and debugging.</p>
+                </div>
+            </div>
+            <p class="text-sm text-slate-600 italic">All processing happens client-side in your browser—your data never leaves your device. 100% secure and privacy-safe.</p>
+        </section>
+
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
             <aside class="lg:col-span-3 space-y-4">
                 <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
@@ -193,6 +214,61 @@
                 </div>
             </div>
         </div>
+
+        <!-- Educational Content Section -->
+        <section class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="bg-white rounded-xl border border-slate-200 p-6">
+                <h3 class="text-lg font-bold text-slate-900 mb-3">Common JSON Issues</h3>
+                <ul class="space-y-2 text-sm text-slate-600">
+                    <li class="flex items-start">
+                        <span class="text-emerald-600 font-bold mr-2">•</span>
+                        <span><strong>Single Quotes:</strong> JSON requires double quotes, not single quotes around keys and strings.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-emerald-600 font-bold mr-2">•</span>
+                        <span><strong>Trailing Commas:</strong> Arrays and objects cannot have trailing commas after the last element.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-emerald-600 font-bold mr-2">•</span>
+                        <span><strong>Unquoted Keys:</strong> All object keys must be enclosed in double quotes.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-emerald-600 font-bold mr-2">•</span>
+                        <span><strong>Comments:</strong> Standard JSON doesn't support comments; use JSON5 or preprocessors instead.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-emerald-600 font-bold mr-2">•</span>
+                        <span><strong>Escape Sequences:</strong> Special characters like newlines and quotes must be properly escaped.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-white rounded-xl border border-slate-200 p-6">
+                <h3 class="text-lg font-bold text-slate-900 mb-3">JSON Best Practices</h3>
+                <ul class="space-y-2 text-sm text-slate-600">
+                    <li class="flex items-start">
+                        <span class="text-emerald-600 font-bold mr-2">•</span>
+                        <span><strong>Use Consistent Formatting:</strong> Maintain uniform indentation and spacing for readability.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-emerald-600 font-bold mr-2">•</span>
+                        <span><strong>Keep Data Structures Flat:</strong> Avoid deeply nested objects that are hard to parse and validate.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-emerald-600 font-bold mr-2">•</span>
+                        <span><strong>Use Descriptive Names:</strong> Choose clear, meaningful names for keys to make data self-documenting.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-emerald-600 font-bold mr-2">•</span>
+                        <span><strong>Validate Early:</strong> Validate JSON data at system boundaries to catch errors immediately.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-emerald-600 font-bold mr-2">•</span>
+                        <span><strong>Use Standard Types:</strong> Stick to JSON-native types (strings, numbers, booleans, null, arrays, objects).</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
     </main>
 
     <footer class="bg-white border-t border-slate-200 py-10 mt-6">
@@ -207,18 +283,21 @@
             <script>
                  (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
-            <p class="text-[10px] text-slate-400 font-semibold flex items-center flex-wrap justify-center gap-x-3">
+            <p class="text-[10px] text-slate-400 font-semibold flex items-center flex-wrap justify-center gap-x-3 mb-4">
                 <span>&copy; 2026 SmartJSONFix.com. All rights reserved.</span>
+                <span class="text-slate-300">&middot;</span>
+                <a href="/guide.html" class="hover:text-slate-600 transition">Guide</a>
+                <span class="text-slate-300">&middot;</span>
+                <a href="/faq.html" class="hover:text-slate-600 transition">FAQ</a>
                 <span class="text-slate-300">&middot;</span>
                 <button onclick="openContactModal()" class="hover:text-slate-600 transition">Contact</button>
                 <span class="text-slate-300">&middot;</span>
                 <a href="/privacy.html" class="hover:text-slate-600 transition">Privacy Policy</a>
                 <span class="text-slate-300">&middot;</span>
                 <a href="/terms.html" class="hover:text-slate-600 transition">Terms of Service</a>
-                <span class="text-slate-300">&middot;</span>
-                <span>Because JSON shouldn't be painful.</span>
-                <span class="text-slate-300">&middot;</span>
-                <span>Hosted by <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hover:text-slate-600 transition underline">GitHub.com</a></span>
+            </p>
+            <p class="text-[10px] text-slate-400 font-semibold text-center">
+                <span>Because JSON shouldn't be painful. Hosted by <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hover:text-slate-600 transition underline">GitHub.com</a></span>
             </p>
         </div>
     </footer>
