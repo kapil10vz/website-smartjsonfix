@@ -16,3 +16,4 @@ Crawl-delay: 1
 
 # Reference to sitemap
 Sitemap: https://smartjsonfix.com/sitemap.xml
+
